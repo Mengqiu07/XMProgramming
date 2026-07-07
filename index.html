@@ -921,19 +921,6 @@
       gap: 4px;
     }
 
-    .article-arrow {
-      flex-shrink: 0;
-      font-size: 20px;
-      color: var(--text-dim);
-      align-self: center;
-      transition: all 0.35s ease;
-    }
-
-    .article-card:hover .article-arrow {
-      color: var(--primary);
-      transform: translateX(4px);
-    }
-
     @media (max-width: 600px) {
       .article-card {
         flex-direction: column;
@@ -945,7 +932,6 @@
         gap: 8px;
         align-items: baseline;
       }
-      .article-arrow { display: none; }
     }
 
     /* ===== ARTICLE SEARCH ===== */
@@ -1178,7 +1164,7 @@
         </div>
         <div class="article-no-result" id="article-no-result">没有找到匹配的文章</div>
         <div class="article-grid" id="article-grid">
-          <div class="article-card reveal">
+          <div class="article-card reveal" onclick="openArticle('【社团新闻】计算机社正式成立','2026年6月24日','计算机社','社团新闻','今天，我校团委学生会社团部给予我社答复：学校正式通过社团成立申请。计算机社于2026年6月24日正式成立。社团正式定名为计算机社，社团地点为上海市向明中学（西部校区）创新协会楼5206教室，我校信息组马老师担任指导老师，李羿嵘担任社长。社团将围绕C++程序设计、HTML网页设计、unity游戏设计展开社团活动。社团活动实施分层活动，为多方面人才考虑。欢迎新高一、高二学生报名加入。')">
             <div class="article-date">
               <div class="day">6/24</div>
               <div class="month">2026</div>
@@ -1191,10 +1177,9 @@
                 <span>🏷️ 社团新闻</span>
               </div>
             </div>
-            <div class="article-arrow" onclick="event.stopPropagation();openArticle('【社团新闻】计算机社正式成立','2026年6月24日','计算机社','社团新闻','今天，我校团委学生会社团部给予我社答复：学校正式通过社团成立申请。计算机社于2026年6月24日正式成立。社团正式定名为计算机社，社团地点为上海市向明中学（西部校区）创新协会楼5206教室，我校信息组马老师担任指导老师，李羿嵘担任社长。社团将围绕C++程序设计、HTML网页设计、unity游戏设计展开社团活动。社团活动实施分层活动，为多方面人才考虑。欢迎新高一、高二学生报名加入。')">→</div>
           </div>
 
-          <div class="article-card reveal">
+          <div class="article-card reveal" onclick="openArticle('【社团新闻】我社正式启动创立社团程序','2026年6月7日','计算机社','社团新闻','今天，我社相关组织部门正式决定向社团部提交新社团成立申请表。')">
             <div class="article-date">
               <div class="day">6/7</div>
               <div class="month">2026</div>
@@ -1207,7 +1192,6 @@
                 <span>🏷️ 社团新闻</span>
               </div>
             </div>
-            <div class="article-arrow" onclick="event.stopPropagation();openArticle('【社团新闻】我社正式启动创立社团程序','2026年6月7日','计算机社','社团新闻','今天，我社相关组织部门正式决定向社团部提交新社团成立申请表。')">→</div>
           </div>
         </div>
       </section>
