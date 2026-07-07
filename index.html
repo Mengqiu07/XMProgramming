@@ -39,15 +39,10 @@
       z-index: 1;
     }
 
-    /* ===== SCROLL REVEAL ===== */
+    /* ===== SCROLL REVEAL (disabled animations) ===== */
     .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .reveal.visible {
       opacity: 1;
-      transform: translateY(0);
+      transform: none;
     }
 
     /* ===== HERO ===== */
@@ -953,6 +948,62 @@
       .article-arrow { display: none; }
     }
 
+    /* ===== ARTICLE SEARCH ===== */
+    .article-search {
+      position: relative;
+      max-width: 480px;
+      margin: 0 auto 28px;
+    }
+
+    .article-search input {
+      width: 100%;
+      padding: 14px 48px 14px 20px;
+      font-size: 14px;
+      font-family: 'Rajdhani', 'Noto Sans SC', sans-serif;
+      color: var(--text);
+      background: rgba(8, 18, 40, 0.6);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      outline: none;
+      transition: all 0.35s ease;
+      letter-spacing: 1px;
+    }
+
+    .article-search input::placeholder {
+      color: var(--text-dim);
+      letter-spacing: 2px;
+    }
+
+    .article-search input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 25px rgba(0, 212, 255, 0.2);
+      background: rgba(8, 18, 40, 0.85);
+    }
+
+    .article-search-icon {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      color: var(--text-dim);
+      pointer-events: none;
+      transition: color 0.3s ease;
+    }
+
+    .article-search input:focus ~ .article-search-icon {
+      color: var(--primary);
+    }
+
+    .article-no-result {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-dim);
+      font-size: 14px;
+      letter-spacing: 2px;
+    }
+
     /* ===== PARTICLES ===== */
     #particles-canvas {
       position: fixed;
@@ -977,15 +1028,15 @@
     <!-- ===== STATS ===== -->
     <div class="stats-bar reveal">
       <div class="stat-item">
-        <div class="stat-num" data-count="3">0<span class="plus">+</span></div>
+        <div class="stat-num">3<span class="plus">+</span></div>
         <div class="stat-label">学习方向</div>
       </div>
       <div class="stat-item">
-        <div class="stat-num" data-count="4">0</div>
+        <div class="stat-num">4</div>
         <div class="stat-label">难度层级</div>
       </div>
       <div class="stat-item">
-        <div class="stat-num" data-count="100">0<span class="plus">+</span></div>
+        <div class="stat-num">100<span class="plus">+</span></div>
         <div class="stat-label">项目作品</div>
       </div>
     </div>
@@ -1121,7 +1172,12 @@
           <h2>社团文章</h2>
           <div class="section-subtitle">技术分享 · 项目复盘 · 赛事经验</div>
         </div>
-        <div class="article-grid">
+        <div class="article-search">
+          <input type="text" id="article-search-input" placeholder="搜索文章..." oninput="filterArticles()">
+          <span class="article-search-icon">🔍</span>
+        </div>
+        <div class="article-no-result" id="article-no-result">没有找到匹配的文章</div>
+        <div class="article-grid" id="article-grid">
           <div class="article-card reveal">
             <div class="article-date">
               <div class="day">6/24</div>
@@ -1393,64 +1449,6 @@
       draw();
     })();
 
-    // ---- Scroll Reveal ----
-    (function(){
-      var reveals = document.querySelectorAll('.reveal');
-      function revealOnScroll() {
-        var windowHeight = window.innerHeight;
-        for (var i = 0; i < reveals.length; i++) {
-          var top = reveals[i].getBoundingClientRect().top;
-          if (top < windowHeight - 80) {
-            reveals[i].classList.add('visible');
-          }
-        }
-      }
-      window.addEventListener('scroll', revealOnScroll);
-      window.addEventListener('load', function() {
-        revealOnScroll();
-        // Auto-show first visible reveals
-        setTimeout(function() {
-          var firstBatch = document.querySelector('.hero.reveal');
-          if (firstBatch) firstBatch.classList.add('visible');
-        }, 100);
-      });
-    })();
-
-    // ---- Count Up Animation ----
-    (function(){
-      var statNums = document.querySelectorAll('.stat-num[data-count]');
-      var counted = false;
-      function countUp() {
-        if (counted) return;
-        var statsBar = document.querySelector('.stats-bar');
-        if (!statsBar) return;
-        var top = statsBar.getBoundingClientRect().top;
-        if (top < window.innerHeight - 60) {
-          counted = true;
-          statNums.forEach(function(el) {
-            var target = parseInt(el.getAttribute('data-count'));
-            var hasPlus = el.querySelector('.plus');
-            var suffix = hasPlus ? '<span class="plus">+</span>' : '';
-            var duration = 1500;
-            var start = performance.now();
-            function update(now) {
-              var elapsed = now - start;
-              var progress = Math.min(elapsed / duration, 1);
-              var eased = 1 - Math.pow(1 - progress, 3);
-              var current = Math.floor(eased * target);
-              el.innerHTML = current + suffix;
-              if (progress < 1) requestAnimationFrame(update);
-            }
-            requestAnimationFrame(update);
-          });
-        }
-      }
-      window.addEventListener('scroll', countUp);
-      window.addEventListener('load', function() {
-        setTimeout(countUp, 200);
-      });
-    })();
-
     // ---- Tab Navigation ----
     (function(){
       var tabs = document.querySelectorAll('.nav-tab');
@@ -1464,11 +1462,6 @@
             p.classList.remove('active');
             if (p.id === targetId) p.classList.add('active');
           });
-          // Re-trigger reveal for newly visible elements
-          setTimeout(function() {
-            var evt = new Event('scroll');
-            window.dispatchEvent(evt);
-          }, 100);
         });
       });
     })();
@@ -1481,6 +1474,24 @@
       document.getElementById('am-tag').textContent = '🏷️ ' + tag;
       document.getElementById('am-body').textContent = body;
       document.getElementById('article-modal').style.display = 'flex';
+    }
+
+    // ---- Article Search ----
+    function filterArticles() {
+      var query = document.getElementById('article-search-input').value.toLowerCase().trim();
+      var cards = document.querySelectorAll('#article-grid .article-card');
+      var noResult = document.getElementById('article-no-result');
+      var visibleCount = 0;
+      cards.forEach(function(card) {
+        var text = card.textContent.toLowerCase();
+        if (!query || text.indexOf(query) !== -1) {
+          card.style.display = '';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      noResult.style.display = visibleCount === 0 ? 'block' : 'none';
     }
   </script>
 </body>
