@@ -1293,7 +1293,7 @@
             </div>
           </div>
 
-          <div class="article-card reveal" onclick="openArticle('【社团新闻】计算机社正式确认标志','2026年7月8日','计算机社','社团新闻','今天，计算机社团决定启用新社团标志。')">
+          <div class="article-card reveal" onclick="openArticle('【社团新闻】计算机社正式确认标志','2026年7月8日','计算机社','社团新闻','今天，计算机社团决定启用新社团标志。<br><br><div style=\'text-align:center;\'><img src=\'images/club.png\' alt=\'社团标志\' style=\'max-width:200px;border-radius:50%;border:2px solid rgba(0,229,255,0.3);box-shadow:0 0 25px rgba(0,212,255,0.2);margin-bottom:18px;\'></div><br><strong>设计理念：</strong><br><br><strong>1. 核心图形：XM 字母标识</strong><br>标志中央的 XM 是 Xiangming（向明）的缩写，X 代表无限可能，M 如一条向上的数字轨迹。<br><br><strong>2. 像素渐隐效果</strong><br>X 左侧由小方块逐渐消散，代表从基础代码开始，创造完整的数字世界。<br><br><strong>3. 电路纹理</strong><br>背景线路元素象征计算机硬件基础，寓意创造力从校园连接更广阔科技世界。<br><br><strong>4. 二进制元素</strong><br>隐藏的 0 和 1 是计算机最基础的语言，低调不抢主体。<br><br><strong>5. 外圈文字</strong><br>上方中文"向明中学计算机社"，下方英文 Xiangming High School Programming Club。')">
             <div class="article-date">
               <div class="day">7/8</div>
               <div class="month">2026</div>
@@ -1581,7 +1581,7 @@
       document.getElementById('am-date').textContent = date;
       document.getElementById('am-author').textContent = '📝 ' + author;
       document.getElementById('am-tag').textContent = '🏷️ ' + tag;
-      document.getElementById('am-body').textContent = body;
+      document.getElementById('am-body').innerHTML = body;
       document.getElementById('article-modal').style.display = 'flex';
     }
 
