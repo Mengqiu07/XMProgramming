@@ -97,9 +97,21 @@
       transition: all 0.4s ease;
     }
 
-    .hero-logo:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 45px rgba(0, 212, 255, 0.4), 0 0 80px rgba(255, 64, 129, 0.2);
+    .inline-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1.5px solid rgba(0, 229, 255, 0.3);
+      box-shadow: 0 0 18px rgba(0, 212, 255, 0.2), 0 0 35px rgba(255, 64, 129, 0.08);
+      display: block;
+      margin: 0 auto 16px;
+      transition: all 0.35s ease;
+    }
+
+    .inline-badge:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px rgba(0, 212, 255, 0.4), 0 0 50px rgba(255, 64, 129, 0.15);
     }
 
     .hero h1 {
@@ -1046,9 +1058,9 @@
   <div class="container">
     <!-- ===== HERO ===== -->
     <header class="hero reveal">
-      <img src="images/club.png" alt="计算机社徽章" class="hero-logo">
       <div class="hero-badge"><span class="dot"></span> 2026 RECRUITMENT <span class="dot"></span></div>
       <h1>向明中学计算机社</h1>
+      <img src="images/club.png" alt="社团徽章" class="inline-badge">
       <div class="hero-subtitle">正 式 招 新</div>
       <div class="hero-tagline">C++ 编程 · 网页设计 · Unity 游戏开发 &nbsp;|&nbsp; 全方向授课</div>
     </header>
@@ -1072,6 +1084,7 @@
     <!-- ===== CTA ===== -->
     <div class="cta-section reveal">
       <div class="cta-content">
+        <img src="images/club.png" alt="社团徽章" class="inline-badge">
         <h2>加入我们</h2>
         <p class="cta-text">热爱代码、喜欢创作、想掌握硬核实用技能的新高一和新高二，欢迎加入我们！</p>
         <a href="javascript:void(0)" class="cta-btn" onclick="document.getElementById('weixin-modal').style.display='flex'">立 即 报 名</a>
@@ -1243,6 +1256,7 @@
       <p>© 2026 上海市向明中学计算机社 · Xiangming High School Programming Club</p>
       <p style="margin-top:6px;">社长：李羿嵘（Mengqiu07）</p>
       <div class="footer-links">
+        <img src="images/club.png" alt="社团徽章" class="inline-badge" style="width:24px;height:24px;margin-bottom:0;">
         <span style="color:rgba(255,255,255,0.35);font-size:12px;letter-spacing:1px;">友情链接</span>
         <span class="divider">|</span>
         <a href="https://xiangming.hpe.cn/" target="_blank" rel="noopener">向明中学门户网站</a>
