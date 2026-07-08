@@ -16,10 +16,10 @@
       --text: #d0d8e8;
       --text-dim: #8899bb;
       --border: rgba(0, 229, 255, 0.15);
-      --glow: rgba(0, 229, 255, 0.3);
+      --glow: (0, 229, 255, 0.3);
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * { margin: 0; prgbaadding: 0; box-sizing: border-box; }
 
     body {
       background: var(--bg);
@@ -221,6 +221,55 @@
     }
     .section-header h2::before { left: -35px; }
     .section-header h2::after { right: -35px; background: linear-gradient(90deg, var(--primary), transparent); }
+
+    /* ===== BADGE SHOWCASE ===== */
+    .badge-showcase {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 32px;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .badge-showcase:hover {
+      border-color: rgba(0, 212, 255, 0.45);
+      box-shadow: 0 12px 35px rgba(0, 212, 255, 0.1);
+      transform: translateX(6px);
+    }
+
+    .badge-showcase-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(0, 229, 255, 0.35);
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+      flex-shrink: 0;
+    }
+
+    .badge-showcase-text h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 18px;
+      color: var(--primary);
+      letter-spacing: 3px;
+      margin-bottom: 6px;
+    }
+
+    .badge-showcase-text p {
+      font-size: 13px;
+      color: var(--text-dim);
+      letter-spacing: 1px;
+    }
+
+    .badge-showcase:hover .badge-showcase-text p {
+      color: var(--primary);
+    }
 
     .section-subtitle {
       font-size: 13px;
@@ -757,6 +806,15 @@
       color: var(--text);
       line-height: 2;
       margin-bottom: 24px;
+      text-align: left;
+    }
+
+    .article-modal-content .article-full-body p {
+      margin-bottom: 12px;
+    }
+
+    .article-modal-content .article-full-body strong {
+      color: var(--primary);
     }
 
     .article-modal-close {
@@ -1071,6 +1129,20 @@
 
     <!-- ===== TAB: 首页 ===== -->
     <div class="tab-panel active" id="tab-home">
+      <!-- ===== 社团标志 ===== -->
+      <section class="section reveal">
+        <div class="section-header">
+          <h2>社团标志</h2>
+        </div>
+        <div class="badge-showcase" onclick="document.getElementById('badge-modal').style.display='flex'">
+          <img src="images/club.png" alt="社团徽章" class="badge-showcase-img">
+          <div class="badge-showcase-text">
+            <h3>社团标志</h3>
+            <p>点击查看设计理念 →</p>
+          </div>
+        </div>
+      </section>
+
       <!-- ===== 三大学习赛道 ===== -->
       <section class="section reveal">
         <div class="section-header">
@@ -1258,6 +1330,26 @@
       <h3 id="am-title"></h3>
       <div class="article-full-body" id="am-body"></div>
       <button class="article-modal-close" onclick="document.getElementById('article-modal').style.display='none'">关 闭</button>
+    </div>
+  </div>
+
+  <!-- ===== 社徽设计理念弹窗 ===== -->
+  <div class="article-modal" id="badge-modal" onclick="if(event.target===this)document.getElementById('badge-modal').style.display='none'">
+    <div class="article-modal-content">
+      <h3>社徽设计理念</h3>
+      <div class="article-full-body">
+        <p><strong>1. 核心图形：XM 字母标识</strong></p>
+        <p>标志中央的 "XM" 是 Xiangming（向明）的缩写，也是整个社团的视觉核心。<br>X 代表 Xiang（向）采用较强的几何切割结构，象征：无限可能（eXplore）<br>M 代表 Ming（明），采用渐变蓝色设计，像一条不断向上的数字轨迹。</p>
+        <p><strong>2. 像素渐隐效果：代码世界的视觉语言</strong></p>
+        <p>X 左侧由大量小方块逐渐消散：小方块代表计算机中的像素（Pixel）、数据单元（Data），从完整图形到数字碎片的过渡，表达"从基础代码与数据开始，通过创造形成完整的数字世界"。</p>
+        <p><strong>3. 电路纹理：连接人与技术</strong></p>
+        <p>背景中的线路元素来源于电子电路，象征计算机硬件基础。电路向外延伸，寓意学生的创造力从校园出发，连接更广阔的科技世界。</p>
+        <p><strong>4. 二进制数字元素：计算机科学本源</strong></p>
+        <p>背景中隐藏的 0 和 1 是计算机世界最基础的语言，代表二进制逻辑。同时采用低调透明的方式处理，不抢夺主体视觉，让科技元素成为"隐藏彩蛋"。</p>
+        <p><strong>5. 外圈文字</strong></p>
+        <p>上方中文"向明中学计算机社"，下方英文 Xiangming High School Programming Club。这个标志希望表达的不只是"计算机社"，而是一个由学生组成的科技创新共同体：从学习代码开始，培养逻辑思维；从解决问题开始，创造属于未来的数字世界。</p>
+      </div>
+      <button class="article-modal-close" onclick="document.getElementById('badge-modal').style.display='none'">关 闭</button>
     </div>
   </div>
 
