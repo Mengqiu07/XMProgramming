@@ -564,6 +564,30 @@
       letter-spacing: 2px;
     }
 
+    .footer-links {
+      margin-top: 18px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 1px;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .footer-links .divider {
+      color: rgba(255,255,255,0.15);
+    }
+
     /* ===== WEIXIN MODAL ===== */
     .weixin-modal {
       display: none;
@@ -1201,6 +1225,13 @@
     <footer class="footer">
       <p>© 2026 上海市向明中学计算机社 · Xiangming High School Programming Club</p>
       <p style="margin-top:6px;">社长：李羿嵘（Mengqiu07）</p>
+      <div class="footer-links">
+        <span style="color:rgba(255,255,255,0.35);font-size:12px;letter-spacing:1px;">友情链接</span>
+        <span class="divider">|</span>
+        <a href="https://xiangming.hpe.cn/" target="_blank" rel="noopener">向明中学门户网站</a>
+        <span class="divider">|</span>
+        <a href="https://racoldcn.github.io/HSC/" target="_blank" rel="noopener">向明中学超科学社</a>
+      </div>
     </footer>
   </div>
 
