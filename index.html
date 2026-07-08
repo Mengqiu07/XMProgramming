@@ -1263,7 +1263,7 @@
         </div>
         <div class="article-no-result" id="article-no-result">没有找到匹配的文章</div>
         <div class="article-grid" id="article-grid">
-          <div class="article-card reveal" onclick="openArticle('【社团新闻】计算机社正式成立','2026年6月24日','计算机社','社团新闻','今天，我校团委学生会社团部给予我社答复：学校正式通过社团成立申请。计算机社于2026年6月24日正式成立。社团正式定名为计算机社，社团地点为上海市向明中学（西部校区）创新协会楼5206教室，我校信息组马老师担任指导老师，李羿嵘担任社长。社团将围绕C++程序设计、HTML网页设计、unity游戏设计展开社团活动。社团活动实施分层活动，为多方面人才考虑。欢迎新高一、高二学生报名加入。')">
+          <div class="article-card reveal" data-article='{"title":"【社团新闻】计算机社正式成立","date":"2026年6月24日","author":"计算机社","tag":"社团新闻","body":"今天，我校团委学生会社团部给予我社答复：学校正式通过社团成立申请。计算机社于2026年6月24日正式成立。社团正式定名为计算机社，社团地点为上海市向明中学（西部校区）创新协会楼5206教室，我校信息组马老师担任指导老师，李羿嵘担任社长。社团将围绕C++程序设计、HTML网页设计、unity游戏设计展开社团活动。社团活动实施分层活动，为多方面人才考虑。欢迎新高一、高二学生报名加入。"}'>
             <div class="article-date">
               <div class="day">6/24</div>
               <div class="month">2026</div>
@@ -1278,7 +1278,7 @@
             </div>
           </div>
 
-          <div class="article-card reveal" onclick="openArticle('【社团新闻】我社正式启动创立社团程序','2026年6月7日','计算机社','社团新闻','今天，我社相关组织部门正式决定向社团部提交新社团成立申请表。')">
+          <div class="article-card reveal" data-article='{"title":"【社团新闻】我社正式启动创立社团程序","date":"2026年6月7日","author":"计算机社","tag":"社团新闻","body":"今天，我社相关组织部门正式决定向社团部提交新社团成立申请表。"}'>
             <div class="article-date">
               <div class="day">6/7</div>
               <div class="month">2026</div>
@@ -1293,7 +1293,7 @@
             </div>
           </div>
 
-          <div class="article-card reveal" onclick="openArticle('【社团新闻】计算机社正式确认标志','2026年7月8日','计算机社','社团新闻','今天，计算机社团决定启用新社团标志。<br><br><div style=\'text-align:center;\'><img src=\'images/club.png\' alt=\'社团标志\' style=\'max-width:200px;border-radius:50%;border:2px solid rgba(0,229,255,0.3);box-shadow:0 0 25px rgba(0,212,255,0.2);margin-bottom:18px;\'></div><br><strong>设计理念：</strong><br><br><strong>1. 核心图形：XM 字母标识</strong><br>标志中央的 XM 是 Xiangming（向明）的缩写，X 代表无限可能，M 如一条向上的数字轨迹。<br><br><strong>2. 像素渐隐效果</strong><br>X 左侧由小方块逐渐消散，代表从基础代码开始，创造完整的数字世界。<br><br><strong>3. 电路纹理</strong><br>背景线路元素象征计算机硬件基础，寓意创造力从校园连接更广阔科技世界。<br><br><strong>4. 二进制元素</strong><br>隐藏的 0 和 1 是计算机最基础的语言，低调不抢主体。<br><br><strong>5. 外圈文字</strong><br>上方中文"向明中学计算机社"，下方英文 Xiangming High School Programming Club。')">
+          <div class="article-card reveal" data-article='{"title":"【社团新闻】计算机社正式确认标志","date":"2026年7月8日","author":"计算机社","tag":"社团新闻","body":"今天，计算机社团决定启用新社团标志。<br><br><div style=\"text-align:center;\"><img src=\"images/club.png\" alt=\"社团标志\" style=\"max-width:200px;border-radius:50%;border:2px solid rgba(0,229,255,0.3);box-shadow:0 0 25px rgba(0,212,255,0.2);margin-bottom:18px;\"></div><br><strong>设计理念：</strong><br><br><strong>1. 核心图形：XM 字母标识</strong><br>标志中央的 XM 是 Xiangming（向明）的缩写，X 代表无限可能，M 如一条向上的数字轨迹。<br><br><strong>2. 像素渐隐效果</strong><br>X 左侧由小方块逐渐消散，代表从基础代码开始，创造完整的数字世界。<br><br><strong>3. 电路纹理</strong><br>背景线路元素象征计算机硬件基础，寓意创造力从校园连接更广阔科技世界。<br><br><strong>4. 二进制元素</strong><br>隐藏的 0 和 1 是计算机最基础的语言，低调不抢主体。<br><br><strong>5. 外圈文字</strong><br>上方中文“向明中学计算机社”，下方英文 Xiangming High School Programming Club。"}'>
             <div class="article-date">
               <div class="day">7/8</div>
               <div class="month">2026</div>
@@ -1584,6 +1584,19 @@
       document.getElementById('am-body').innerHTML = body;
       document.getElementById('article-modal').style.display = 'flex';
     }
+
+    // ---- Article Card Click (event delegation) ----
+    (function(){
+      var grid = document.getElementById('article-grid');
+      grid.addEventListener('click', function(e) {
+        var card = e.target.closest('.article-card');
+        if (!card) return;
+        var data = card.getAttribute('data-article');
+        if (!data) return;
+        var article = JSON.parse(data);
+        openArticle(article.title, article.date, article.author, article.tag, article.body);
+      });
+    })();
 
     // ---- Article Search ----
     function filterArticles() {
