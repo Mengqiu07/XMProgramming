@@ -86,6 +86,22 @@
       50% { box-shadow: 0 0 35px rgba(0,212,255,0.5), 0 0 60px rgba(0,212,255,0.1); }
     }
 
+    .hero-logo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(0, 229, 255, 0.35);
+      box-shadow: 0 0 30px rgba(0, 212, 255, 0.2), 0 0 60px rgba(255, 64, 129, 0.1);
+      margin-bottom: 28px;
+      transition: all 0.4s ease;
+    }
+
+    .hero-logo:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 45px rgba(0, 212, 255, 0.4), 0 0 80px rgba(255, 64, 129, 0.2);
+    }
+
     .hero h1 {
       font-family: 'Orbitron', sans-serif;
       font-size: clamp(32px, 6vw, 56px);
@@ -1030,6 +1046,7 @@
   <div class="container">
     <!-- ===== HERO ===== -->
     <header class="hero reveal">
+      <img src="images/club.png" alt="计算机社徽章" class="hero-logo">
       <div class="hero-badge"><span class="dot"></span> 2026 RECRUITMENT <span class="dot"></span></div>
       <h1>向明中学计算机社</h1>
       <div class="hero-subtitle">正 式 招 新</div>
