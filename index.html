@@ -1263,7 +1263,7 @@
         </div>
         <div class="article-no-result" id="article-no-result">没有找到匹配的文章</div>
         <div class="article-grid" id="article-grid">
-          <div class="article-card reveal" data-article='{"title":"【社团新闻】计算机社正式确认标志","date":"2026年7月8日","author":"计算机社","tag":"社团新闻","body":"今天，计算机社团决定启用新社团标志。<br><br><div style=\"text-align:center;\"><img src=\"images/club.png\" alt=\"社团标志\" style=\"max-width:200px;border-radius:50%;border:2px solid rgba(0,229,255,0.3);box-shadow:0 0 25px rgba(0,212,255,0.2);margin-bottom:18px;\"></div><br><strong>设计理念：</strong><br><br><strong>1. 核心图形：XM 字母标识</strong><br>标志中央的 XM 是 Xiangming（向明）的缩写，X 代表无限可能，M 如一条向上的数字轨迹。<br><br><strong>2. 像素渐隐效果</strong><br>X 左侧由小方块逐渐消散，代表从基础代码开始，创造完整的数字世界。<br><br><strong>3. 电路纹理</strong><br>背景线路元素象征计算机硬件基础，寓意创造力从校园连接更广阔科技世界。<br><br><strong>4. 二进制元素</strong><br>隐藏的 0 和 1 是计算机最基础的语言，低调不抢主体。<br><br><strong>5. 外圈文字</strong><br>上方中文"向明中学计算机社"，下方英文 Xiangming High School Programming Club。"}'>
+          <div class="article-card reveal" data-article="{&quot;title&quot;:&quot;【社团新闻】计算机社正式确认标志&quot;,&quot;date&quot;:&quot;2026年7月8日&quot;,&quot;author&quot;:&quot;计算机社&quot;,&quot;tag&quot;:&quot;社团新闻&quot;,&quot;body&quot;:&quot;今天，计算机社团决定启用新社团标志。<br><br><div style='text-align:center;'><img src='images/club.png' alt='社团标志' style='max-width:200px;border-radius:50%;border:2px solid rgba(0,229,255,0.3);box-shadow:0 0 25px rgba(0,212,255,0.2);margin-bottom:18px;'></div><br><strong>设计理念：</strong><br><br><strong>1. 核心图形：XM 字母标识</strong><br>标志中央的 XM 是 Xiangming（向明）的缩写，X 代表无限可能，M 如一条向上的数字轨迹。<br><br><strong>2. 像素渐隐效果</strong><br>X 左侧由小方块逐渐消散，代表从基础代码开始，创造完整的数字世界。<br><br><strong>3. 电路纹理</strong><br>背景线路元素象征计算机硬件基础，寓意创造力从校园连接更广阔科技世界。<br><br><strong>4. 二进制元素</strong><br>隐藏的 0 和 1 是计算机最基础的语言，低调不抢主体。<br><br><strong>5. 外圈文字</strong><br>上方中文'向明中学计算机社'，下方英文 Xiangming High School Programming Club。&quot;}">
             <div class="article-date">
               <div class="day">7/8</div>
               <div class="month">2026</div>
@@ -1307,20 +1307,7 @@
               </div>
             </div>
           </div>
-            <div class="article-date">
-              <div class="day">7/8</div>
-              <div class="month">2026</div>
-            </div>
-            <div class="article-body">
-              <h4>【社团新闻】计算机社正式确认标志</h4>
-              <p class="article-excerpt">今天，计算机社团决定启用新社团标志。</p>
-              <div class="article-meta">
-                <span>📝 计算机社</span>
-                <span>🏷️ 社团新闻</span>
-              </div>
-            </div>
           </div>
-        </div>
       </section>
     </div>
 
@@ -1602,12 +1589,29 @@
     (function(){
       var grid = document.getElementById('article-grid');
 
+      // 辅助：解码 HTML 实体
+      function decodeHTMLEntities(str) {
+        var txt = document.createElement('textarea');
+        txt.innerHTML = str;
+        return txt.value;
+      }
+
+      // 安全解析 data-article 属性
+      function parseArticleData(card) {
+        var raw = card.getAttribute('data-article');
+        if (!raw) return null;
+        return JSON.parse(decodeHTMLEntities(raw));
+      }
+
       // 页面加载时按日期从晚到早排序
       (function sortArticles() {
         var cards = Array.prototype.slice.call(grid.querySelectorAll('.article-card'));
         cards.sort(function(a, b) {
-          var dateA = new Date(JSON.parse(a.getAttribute('data-article')).date);
-          var dateB = new Date(JSON.parse(b.getAttribute('data-article')).date);
+          var articleA = parseArticleData(a);
+          var articleB = parseArticleData(b);
+          if (!articleA || !articleB) return 0;
+          var dateA = new Date(articleA.date);
+          var dateB = new Date(articleB.date);
           return dateB - dateA; // 从晚到早
         });
         cards.forEach(function(card) { grid.appendChild(card); });
@@ -1616,9 +1620,8 @@
       grid.addEventListener('click', function(e) {
         var card = e.target.closest('.article-card');
         if (!card) return;
-        var data = card.getAttribute('data-article');
-        if (!data) return;
-        var article = JSON.parse(data);
+        var article = parseArticleData(card);
+        if (!article) return;
         openArticle(article.title, article.date, article.author, article.tag, article.body);
       });
     })();
