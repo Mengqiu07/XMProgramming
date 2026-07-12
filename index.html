@@ -1627,6 +1627,7 @@
     // ---- Track Card Click (event delegation) ----
     (function(){
       var trackGrid = document.querySelector('.track-grid');
+      if (!trackGrid) return;
       trackGrid.addEventListener('click', function(e) {
         var card = e.target.closest('.track-card');
         if (!card) return;
@@ -1644,6 +1645,7 @@
     // ---- Article Card Click (event delegation) ----
     (function(){
       var grid = document.getElementById('article-grid');
+      if (!grid) return;
 
       // 辅助：解码 HTML 实体
       function decodeHTMLEntities(str) {
@@ -1656,7 +1658,11 @@
       function parseArticleData(card) {
         var raw = card.getAttribute('data-article');
         if (!raw) return null;
-        return JSON.parse(decodeHTMLEntities(raw));
+        try {
+          return JSON.parse(decodeHTMLEntities(raw));
+        } catch(e) {
+          return null;
+        }
       }
 
       // 页面加载时按日期从晚到早排序
