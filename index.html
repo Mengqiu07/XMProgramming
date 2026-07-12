@@ -1648,7 +1648,13 @@
         if (!card) return;
         var article = parseArticleData(card);
         if (!article) return;
-        openArticle(article.title, article.date, article.author, article.tag, article.body);
+        // 将日期转为 URL slug，如 "2026年7月8日" -> "2026-07-08"
+        var dateStr = article.date;
+        var m = dateStr.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);
+        if (m) {
+          var slug = m[1] + '-' + m[2].padStart(2,'0') + '-' + m[3].padStart(2,'0');
+          window.location.href = slug + '.html';
+        }
       });
     })();
 
