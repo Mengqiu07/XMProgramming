@@ -161,7 +161,7 @@
         <span>&#x1f4dd; 计算机社</span>
         <span>&#x1f3f7;&#xfe0f; 招新简章</span>
       </div>
-      <h1 class="article-title">计算机社等你入席&middot;2026招新简章</h1>
+      <h1 class="article-title">【社团招新】计算机社等你入席&middot;2026招新简章</h1>
       <div class="article-body">
 
         <div class="highlight-box">
@@ -215,8 +215,22 @@
           <p><strong>向明中学卢湾校区计算机社，2026，等你入席。</strong></p>
         </div>
 
+        <div style="text-align:center;margin-top:30px;">
+          <button onclick="document.getElementById('join-modal').style.display='flex'" style="padding:14px 40px;font-size:16px;font-family:'Orbitron','Noto Sans SC',sans-serif;font-weight:700;letter-spacing:2px;color:#020810;background:linear-gradient(135deg,var(--primary),#69f0ae);border:none;border-radius:30px;cursor:pointer;box-shadow:0 0 25px rgba(0,229,255,0.3);transition:all 0.3s;">加入我们</button>
+        </div>
+
       </div>
     </div>
   </div>
+
+  <!-- 加入我们弹窗 -->
+  <div id="join-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(2,8,16,0.9);z-index:9999;justify-content:center;align-items:center;" onclick="if(event.target===this)this.style.display='none'">
+    <div style="background:var(--card-bg);border:2px solid var(--border);border-radius:20px;padding:40px;text-align:center;max-width:400px;width:90%;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 25px 80px rgba(0,212,255,0.2);">
+      <img src="images/lyrweixin.jpg" alt="社长微信" style="max-width:200px;border-radius:12px;border:2px solid rgba(0,229,255,0.3);">
+      <p style="color:var(--text-dim);font-size:13px;margin-top:12px;letter-spacing:1px;">李羿嵘社长微信</p>
+      <button onclick="document.getElementById('join-modal').style.display='none'" style="margin-top:20px;padding:10px 30px;font-size:14px;color:var(--text-dim);background:transparent;border:1px solid var(--border);border-radius:20px;cursor:pointer;transition:all 0.3s;" onmouseover="this.style.color='#fff';this.style.borderColor='var(--primary)'" onmouseout="this.style.color='var(--text-dim)';this.style.borderColor='rgba(0,229,255,0.15)'">关 闭</button>
+    </div>
+  </div>
+
 </body>
 </html>
